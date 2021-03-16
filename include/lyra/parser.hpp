@@ -242,6 +242,7 @@ class bound_parser : public composable_parser<Derived>
 		return m_cardinality;
 	}
 	std::string hint() const { return m_hint; }
+        Derived& hint(std::string const& hint);
 
 	template <
 		typename T,
@@ -415,6 +416,13 @@ Derived& bound_parser<Derived>::cardinality(size_t n, size_t m)
 {
 	m_cardinality = { n, m };
 	return static_cast<Derived&>(*this);
+}
+
+template <typename Derived>
+Derived& bound_parser<Derived>::hint(std::string const& hint)
+{
+    m_hint = hint;
+    return static_cast<Derived&>(*this);
 }
 
 /* tag::reference[]
